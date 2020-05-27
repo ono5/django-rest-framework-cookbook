@@ -3,6 +3,7 @@
 from rest_framework import serializers
 from news.models import Article
 
+from django.contrib.auth.validators import UnicodeUsernameValidator
 
 class ArticleSerializer(serializers.Serializer):
     """Article Serializer
@@ -10,6 +11,7 @@ class ArticleSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     author = serializers.CharField()
     title = serializers.CharField()
+    description = serializers.CharField()
     body = serializers.CharField()
     location = serializers.CharField()
     publication_date = serializers.DateField()
@@ -38,4 +40,17 @@ class ArticleSerializer(serializers.Serializer):
             'active', instance.active)
         instance.save()
         return instance
+
+    def validate(self, data):
+        """Check that description and title are different"""
+        if data["title"] == data["description"]:
+            raise serializers.ValidationError("Title and Description must be different from one another")
+        return data
+
+    def validate_title(self, value):
+        if len(value) < 60:
+            raise serializers.ValidationError("The title has to be at least 60 charactor")
+        return value
+
+
 

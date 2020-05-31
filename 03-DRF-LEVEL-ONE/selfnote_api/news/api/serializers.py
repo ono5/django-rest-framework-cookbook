@@ -3,7 +3,7 @@
 from datetime import datetime
 from django.utils.timesince import timesince
 from rest_framework import serializers
-from news.models import Article
+from news.models import Article, Journalist
 
 
 class ArticleSerializer(serializers.ModelSerializer):
@@ -29,6 +29,17 @@ class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         exclude = ("id", )
+
+
+class JournalistSerializer(serializers.ModelSerializer):
+    articles = serializers.HyperlinkedRelatedField(many=True,
+                                                   read_only=True,
+                                                   view_name="article-detail") # urls.pyのnameに設定されている名前
+
+    class Meta:
+        model = Journalist
+        fields = "__all__"
+
 
 
 # class ArticleSerializer(serializers.Serializer):

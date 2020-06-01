@@ -1,14 +1,14 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import TimerContainer from './components/TimerContainer';
+import ApiFetch from './components/ApiFetch';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <TimerContainer  />
+        <ApiFetch />
       </header>
     </div>
   );

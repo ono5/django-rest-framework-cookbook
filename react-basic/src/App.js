@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import AppContext from './contexts/AppContext';
 import B from './components/B'
+import BasicReducer from './components/BasicReducer';
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <B />
+          <BasicReducer /> 
         </header>
       </div>
     </AppContext.Provider>
